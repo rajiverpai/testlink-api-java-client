@@ -83,7 +83,7 @@ public class TestLinkAPIGetterTest implements TestLinkAPIConst,
 	public void testAbout()
 	{
 		String method = "testAbout()";
-		TestLinkTest test = new TestLinkTest() {
+		TestLinkJUnitTestRunner test = new TestLinkJUnitTestRunner() {
 			public void runTest(String version, TestLinkAPIClient api) throws Exception {
 				TestLinkAPIResults results = api.about();
 				if ( results == null ) {
@@ -108,7 +108,7 @@ public class TestLinkAPIGetterTest implements TestLinkAPIConst,
 	public void testPing()
 	{
 		String method = "testPing()";
-		TestLinkTest test = new TestLinkTest() {
+		TestLinkJUnitTestRunner test = new TestLinkJUnitTestRunner() {
 			public void runTest(String version, TestLinkAPIClient api) throws Exception {
 				TestLinkAPIResults results = api.ping();
 				if ( results == null ) {
@@ -133,7 +133,7 @@ public class TestLinkAPIGetterTest implements TestLinkAPIConst,
 	public void testGetProjects()
 	{
 		String method = "testGetProjects()";
-		TestLinkTest test = new TestLinkTest() {
+		TestLinkJUnitTestRunner test = new TestLinkJUnitTestRunner() {
 			public void runTest(String version, TestLinkAPIClient api) throws Exception {
 		
 				TestLinkAPIResults results = api.getProjects();
@@ -159,7 +159,7 @@ public class TestLinkAPIGetterTest implements TestLinkAPIConst,
 	public void testGetFirstLevelTestSuitesForTestProject()
 	{
 		String method = "testGetFirstLevelTestSuitesForTestProject()";
-		TestLinkTest test = new TestLinkTest() {
+		TestLinkJUnitTestRunner test = new TestLinkJUnitTestRunner() {
 			public void runTest(String version, TestLinkAPIClient api) throws Exception {
 				TestLinkAPIResults results = api.getFirstLevelTestSuitesForTestProject(
 					JUNIT_STATIC_PROJECT);
@@ -189,7 +189,7 @@ public class TestLinkAPIGetterTest implements TestLinkAPIConst,
 	public void testGetProjectTestPlans()
 	{
 		String method = "testGetProjectTestPlans()";
-		TestLinkTest test = new TestLinkTest() {
+		TestLinkJUnitTestRunner test = new TestLinkJUnitTestRunner() {
 			public void runTest(String version, TestLinkAPIClient api) throws Exception {
 		
 				TestLinkAPIResults results = api.getProjectTestPlans(JUNIT_STATIC_PROJECT);
@@ -216,7 +216,7 @@ public class TestLinkAPIGetterTest implements TestLinkAPIConst,
 	public void testGetBuildsForTestPlan()
 	{
 		String method = "testGetBuildsForTestPlan()";
-		TestLinkTest test = new TestLinkTest() {
+		TestLinkJUnitTestRunner test = new TestLinkJUnitTestRunner() {
 			public void runTest(String version, TestLinkAPIClient api) throws Exception {
 		
 				TestLinkAPIResults results = api.getBuildsForTestPlan(JUNIT_STATIC_PROJECT,
@@ -245,7 +245,7 @@ public class TestLinkAPIGetterTest implements TestLinkAPIConst,
 	public void testGetLatestBuildForTestPlan()
 	{
 		String method = "testGetLatestBuildForTestPlan()";
-		TestLinkTest test = new TestLinkTest() {
+		TestLinkJUnitTestRunner test = new TestLinkJUnitTestRunner() {
 			public void runTest(String version, TestLinkAPIClient api) throws Exception {
 				TestLinkAPIResults results = api.getLatestBuildForTestPlan(
 					JUNIT_STATIC_PROJECT, JUNIT_STATIC_TEST_PLAN);
@@ -273,7 +273,7 @@ public class TestLinkAPIGetterTest implements TestLinkAPIConst,
 	public void testGetTestSuitesForTestPlan()
 	{
 		String method = "testGetTestSuitesForTestPlan()";
-		TestLinkTest test = new TestLinkTest() {
+		TestLinkJUnitTestRunner test = new TestLinkJUnitTestRunner() {
 			public void runTest(String version, TestLinkAPIClient api) throws Exception {
 				TestLinkAPIResults results = api.getTestSuitesForTestPlan(
 					JUNIT_STATIC_PROJECT, JUNIT_STATIC_TEST_PLAN);
@@ -300,7 +300,7 @@ public class TestLinkAPIGetterTest implements TestLinkAPIConst,
 	public void testGetTestCaseIDByName()
 	{
 		String method = "testGetTestCaseIDByName()";
-		TestLinkTest test = new TestLinkTest() {
+		TestLinkJUnitTestRunner test = new TestLinkJUnitTestRunner() {
 			public void runTest(String version, TestLinkAPIClient api) throws Exception {
 				TestLinkAPIResults results = api.getTestCaseIDByName(JUNIT_STATIC_CASE);
 				if ( results == null ) {
@@ -327,7 +327,7 @@ public class TestLinkAPIGetterTest implements TestLinkAPIConst,
 	public void testGetLastExecutionResult()
 	{
 		String method = "testGetLastExecutionResult()";
-		TestLinkTest test = new TestLinkTest() {
+		TestLinkJUnitTestRunner test = new TestLinkJUnitTestRunner() {
 			public void runTest(String version, TestLinkAPIClient api) throws Exception {
 				TestLinkAPIResults results = api.getLastExecutionResult(JUNIT_STATIC_PROJECT,
 					JUNIT_STATIC_TEST_PLAN, JUNIT_STATIC_CASE);
@@ -355,7 +355,7 @@ public class TestLinkAPIGetterTest implements TestLinkAPIConst,
 	public void testGetTestCasesByPlanName()
 	{
 		String method = "testGetTestCasesByPlanName()";
-		TestLinkTest test = new TestLinkTest() {
+		TestLinkJUnitTestRunner test = new TestLinkJUnitTestRunner() {
 			public void runTest(String version, TestLinkAPIClient api) throws Exception {
 				TestLinkAPIResults results = api.getCasesForTestPlan(JUNIT_STATIC_PROJECT,
 					JUNIT_STATIC_TEST_PLAN);
@@ -383,7 +383,7 @@ public class TestLinkAPIGetterTest implements TestLinkAPIConst,
 	public void testGetTestCasesManual()
 	{
 		String method = "testGetTestCasesManual()";
-		TestLinkTest test = new TestLinkTest() {
+		TestLinkJUnitTestRunner test = new TestLinkJUnitTestRunner() {
 			public void runTest(String version, TestLinkAPIClient api) throws Exception {
 				Integer projectID = TestLinkAPIHelper.getProjectID(api, JUNIT_STATIC_PROJECT);
 				if ( projectID == null ) {
@@ -424,7 +424,7 @@ public class TestLinkAPIGetterTest implements TestLinkAPIConst,
 	public void testGetTestCasesAuto()
 	{
 		String method = "testGetTestCasesAuto()";
-		TestLinkTest test = new TestLinkTest() {
+		TestLinkJUnitTestRunner test = new TestLinkJUnitTestRunner() {
 			public void runTest(String version, TestLinkAPIClient api) throws Exception {
 				Integer projectID = TestLinkAPIHelper.getProjectID(api, JUNIT_STATIC_PROJECT);
 				if ( projectID == null ) {
@@ -464,7 +464,7 @@ public class TestLinkAPIGetterTest implements TestLinkAPIConst,
 	public void testGetTestCasesFailed()
 	{
 		String method = "testGetTestCasesFailed()";
-		TestLinkTest test = new TestLinkTest() {
+		TestLinkJUnitTestRunner test = new TestLinkJUnitTestRunner() {
 			public void runTest(String version, TestLinkAPIClient api) throws Exception {
 				Integer projectID = TestLinkAPIHelper.getProjectID(api, JUNIT_STATIC_PROJECT);
 				if ( projectID == null ) {
@@ -503,7 +503,7 @@ public class TestLinkAPIGetterTest implements TestLinkAPIConst,
 	public void testGetTestCasesPassed()
 	{
 		String method = "testGetTestCasesPassed()";
-		TestLinkTest test = new TestLinkTest() {
+		TestLinkJUnitTestRunner test = new TestLinkJUnitTestRunner() {
 			public void runTest(String version, TestLinkAPIClient api) throws Exception {
 				Integer projectID = TestLinkAPIHelper.getProjectID(api, JUNIT_STATIC_PROJECT);
 				if ( projectID == null ) {

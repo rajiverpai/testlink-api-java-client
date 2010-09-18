@@ -84,7 +84,7 @@ public class TestLinkAPIDynamicCreatorsTest implements TestLinkAPIConst, TestCon
 	public void testCreateProject()
 	{
 		String method = "testCreateProject()";
-		TestLinkTest test = new TestLinkTest() {
+		TestLinkJUnitTestRunner test = new TestLinkJUnitTestRunner() {
 			public void runTest(String version, TestLinkAPIClient api) throws Exception {
 			Integer id = api.createTestProject(JUNIT_DYNAMIC_PROJECT, JUNIT_DYNAMIC_PREFIX,
 				JUNIT_DYNAMIC_PROJECT + " created by JUnit test.");
@@ -109,7 +109,7 @@ public class TestLinkAPIDynamicCreatorsTest implements TestLinkAPIConst, TestCon
 	public void testGetProjects()
 	{
 		String method = "testGetProjects()";
-		TestLinkTest test = new TestLinkTest() {
+		TestLinkJUnitTestRunner test = new TestLinkJUnitTestRunner() {
 			public void runTest(String version, TestLinkAPIClient api) throws Exception {
 			TestLinkAPIResults results = api.getProjects();
 			if ( results == null || results.size() == 0 ) {
@@ -134,7 +134,7 @@ public class TestLinkAPIDynamicCreatorsTest implements TestLinkAPIConst, TestCon
 	public void testCreateTestSuite()
 	{
 		String method = "testCreateTestSuite()";
-		TestLinkTest test = new TestLinkTest() {
+		TestLinkJUnitTestRunner test = new TestLinkJUnitTestRunner() {
 			public void runTest(String version, TestLinkAPIClient api) throws Exception {
 			Integer id = api.createTestSuite(JUNIT_DYNAMIC_PROJECT, JUNIT_DYNAMIC_SUITE,
 				"This suite was created by a JUnit test.");
@@ -160,7 +160,7 @@ public class TestLinkAPIDynamicCreatorsTest implements TestLinkAPIConst, TestCon
 	public void testCreateTestCase()
 	{
 		String method = "testCreateTestCase()";
-		TestLinkTest test = new TestLinkTest() {
+		TestLinkJUnitTestRunner test = new TestLinkJUnitTestRunner() {
 			public void runTest(String version, TestLinkAPIClient api) throws Exception {
 			Integer id = api.createTestCase(
 				"admin",
@@ -193,7 +193,7 @@ public class TestLinkAPIDynamicCreatorsTest implements TestLinkAPIConst, TestCon
 	public void testCreateTestCaseWithAllParameters()
 	{
 		String method = "testCreateTestCaseWithAllParameters()";
-		TestLinkTest test = new TestLinkTest() {
+		TestLinkJUnitTestRunner test = new TestLinkJUnitTestRunner() {
 			public void runTest(String version, TestLinkAPIClient api) throws Exception {
 			Integer projectID = TestLinkAPIHelper.getProjectID(api, JUNIT_DYNAMIC_PROJECT);
 			Integer suiteID = TestLinkAPIHelper.getSuiteID(api, JUNIT_DYNAMIC_PROJECT, JUNIT_DYNAMIC_SUITE);
@@ -233,7 +233,7 @@ public class TestLinkAPIDynamicCreatorsTest implements TestLinkAPIConst, TestCon
 	public void testCreateTestCaseWithAllParametersAuto()
 	{
 		String method = "testCreateTestCaseWithAllParametersAuto()";
-		TestLinkTest test = new TestLinkTest() {
+		TestLinkJUnitTestRunner test = new TestLinkJUnitTestRunner() {
 			public void runTest(String version, TestLinkAPIClient api) throws Exception {
 			Integer projectID = TestLinkAPIHelper.getProjectID(api, JUNIT_DYNAMIC_PROJECT);
 			Integer suiteID = TestLinkAPIHelper.getSuiteID(api, JUNIT_DYNAMIC_PROJECT, JUNIT_DYNAMIC_SUITE);
@@ -279,7 +279,7 @@ public class TestLinkAPIDynamicCreatorsTest implements TestLinkAPIConst, TestCon
 	public void testCreateTestPlan()
 	{
 		String method = "testCreateTestPlan()";
-		TestLinkTest test = new TestLinkTest() {
+		TestLinkJUnitTestRunner test = new TestLinkJUnitTestRunner() {
 			public void runTest(String version, TestLinkAPIClient api) throws Exception {
 
 			Integer projectID = TestLinkAPIHelper.getProjectID(api, JUNIT_STATIC_PROJECT);
@@ -334,7 +334,7 @@ public class TestLinkAPIDynamicCreatorsTest implements TestLinkAPIConst, TestCon
 	public void testCreateBuild()
 	{
 		String method = "testCreateBuild()";
-		TestLinkTest test = new TestLinkTest() {
+		TestLinkJUnitTestRunner test = new TestLinkJUnitTestRunner() {
 			public void runTest(String version, TestLinkAPIClient api) throws Exception {
 			Integer id = api.createBuild(JUNIT_STATIC_PROJECT, JUNIT_STATIC_TEST_PLAN, JUNIT_DYNAMIC_BUILD,
 				JUNIT_DYNAMIC_BUILD + " created by JUnit test.");
@@ -359,7 +359,7 @@ public class TestLinkAPIDynamicCreatorsTest implements TestLinkAPIConst, TestCon
 	public void testAddTestCaseToTestPlan()
 	{
 		String method = "testAddTestCaseToTestPlan()";
-		TestLinkTest test = new TestLinkTest() {
+		TestLinkJUnitTestRunner test = new TestLinkJUnitTestRunner() {
 			public void runTest(String version, TestLinkAPIClient api) throws Exception {
 			Integer id = api.createTestCase(
 					"admin",
@@ -395,7 +395,7 @@ public class TestLinkAPIDynamicCreatorsTest implements TestLinkAPIConst, TestCon
 	public void testAddTestPlanCaseToTestPlan()
 	{
 		String method = "testAddTestPlanCaseToTestPlan()";
-		TestLinkTest test = new TestLinkTest() {
+		TestLinkJUnitTestRunner test = new TestLinkJUnitTestRunner() {
 			public void runTest(String version, TestLinkAPIClient api) throws Exception {
 			Integer id = api.createTestCase(
 					"admin",
@@ -432,7 +432,7 @@ public class TestLinkAPIDynamicCreatorsTest implements TestLinkAPIConst, TestCon
 	public void testReportTestCaseResult()
 	{
 		String method = "testReportTestCaseResult()";
-		TestLinkTest test = new TestLinkTest() {
+		TestLinkJUnitTestRunner test = new TestLinkJUnitTestRunner() {
 			public void runTest(String version, TestLinkAPIClient api) throws Exception {
 			TestLinkAPIResults results = api.reportTestCaseResult(
 					JUNIT_STATIC_PROJECT,
@@ -462,7 +462,7 @@ public class TestLinkAPIDynamicCreatorsTest implements TestLinkAPIConst, TestCon
 	public void testReportTestPlanCaseResult()
 	{
 		String method = "testReportTestPlanCaseResult()";
-		TestLinkTest test = new TestLinkTest() {
+		TestLinkJUnitTestRunner test = new TestLinkJUnitTestRunner() {
 			public void runTest(String version, TestLinkAPIClient api) throws Exception {
 			TestLinkAPIResults results = api.reportTestCaseResult(
 					JUNIT_STATIC_PROJECT,
@@ -493,7 +493,7 @@ public class TestLinkAPIDynamicCreatorsTest implements TestLinkAPIConst, TestCon
 	public void testReportTestCaseResultByBuild()
 	{
 		String method = "testReportTestCaseResultByBuild()";
-		TestLinkTest test = new TestLinkTest() {
+		TestLinkJUnitTestRunner test = new TestLinkJUnitTestRunner() {
 			public void runTest(String version, TestLinkAPIClient api) throws Exception {
 			String caseVisibleID = TestLinkAPIHelper.getCaseVisibleID(api, JUNIT_STATIC_PROJECT, JUNIT_DYNAMIC_CASE);
 			TestLinkAPIResults results = api.reportTestCaseResult(

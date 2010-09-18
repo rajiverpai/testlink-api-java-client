@@ -44,7 +44,7 @@ public class VersionListTestRunner implements TestLinkAPIConst, TestConst
 	}
 	
 	
-	public RunExceptionResults runTest(String method, TestLinkTest test) {
+	public RunExceptionResults runTest(String method, TestLinkJUnitTestRunner test) {
 		RunExceptionResults results = new RunExceptionResults();
 	    
 	    // Run the test for all testable versions
