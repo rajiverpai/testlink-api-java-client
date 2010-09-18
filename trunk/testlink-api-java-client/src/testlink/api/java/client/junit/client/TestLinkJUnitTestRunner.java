@@ -28,6 +28,6 @@ import testlink.api.java.client.TestLinkAPIClient;
  * @author DPadilla
  *
  */
-public interface TestLinkTest {
+public interface TestLinkJUnitTestRunner {
 	public void runTest(String version, TestLinkAPIClient api) throws Exception;
 }

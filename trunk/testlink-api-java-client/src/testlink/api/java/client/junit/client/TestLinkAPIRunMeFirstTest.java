@@ -82,7 +82,7 @@ public class TestLinkAPIRunMeFirstTest implements TestLinkAPIConst,
 	public void testAbout()
 	{
 		String method = "testAbout()";
-		TestLinkTest test = new TestLinkTest()
+		TestLinkJUnitTestRunner test = new TestLinkJUnitTestRunner()
 		{
 			public void runTest(
 				String version,
@@ -112,7 +112,7 @@ public class TestLinkAPIRunMeFirstTest implements TestLinkAPIConst,
 	public void createStandardTestProject()
 	{
 		String method = "createStandardTestProject()";
-		TestLinkTest test = new TestLinkTest()
+		TestLinkJUnitTestRunner test = new TestLinkJUnitTestRunner()
 		{
 			public void runTest(
 				String version,
@@ -156,7 +156,7 @@ public class TestLinkAPIRunMeFirstTest implements TestLinkAPIConst,
 	public void createStandardTestSuite()
 	{
 		String method = "createStandardTestSuite()";
-		TestLinkTest test = new TestLinkTest()
+		TestLinkJUnitTestRunner test = new TestLinkJUnitTestRunner()
 		{
 			public void runTest(
 				String version,
@@ -202,7 +202,7 @@ public class TestLinkAPIRunMeFirstTest implements TestLinkAPIConst,
 	public void createStandardTestCase()
 	{
 		String method = "createStandardTestCase()";
-		TestLinkTest test = new TestLinkTest()
+		TestLinkJUnitTestRunner test = new TestLinkJUnitTestRunner()
 		{
 			public void runTest(
 				String version,
@@ -255,7 +255,7 @@ public class TestLinkAPIRunMeFirstTest implements TestLinkAPIConst,
 	public void doesStandardTestPlanExist()
 	{
 		String method = "doesStandardTestPlanExist()";
-		TestLinkTest test = new TestLinkTest()
+		TestLinkJUnitTestRunner test = new TestLinkJUnitTestRunner()
 		{
 			public void runTest(
 				String version,
@@ -290,7 +290,7 @@ public class TestLinkAPIRunMeFirstTest implements TestLinkAPIConst,
 	public void testAddTestCaseToTestPlan()
 	{
 		String method = "testAddTestCaseToTestPlan()";
-		TestLinkTest test = new TestLinkTest()
+		TestLinkJUnitTestRunner test = new TestLinkJUnitTestRunner()
 		{
 			public void runTest(
 				String version,
