@@ -12,7 +12,7 @@
 	<property name="dist.home" value="${dist.builtlibs.home}/testlink-api-client-${dist.date}"/>
 	<property name="compile.home" value="../bin"/>
 	<property name="compile.lib" value="../lib"/>
-	<property name="dist.version" value="2.0"/>
+	<property name="dist.version" value="3.0"/>
 	<property name="dist.prefix" value="testlink-api-client-${dist.version}"/>
 	<property name="dist.jar" value="${dist.home}/${dist.prefix}.jar"/>
 	<property name="dist.zip" value="${dist.prefix}.zip"/>
