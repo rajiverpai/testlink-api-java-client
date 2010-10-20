@@ -1,0 +1,85 @@
+<project name="TesTLinkAPIJavaClient" default="dist" basedir=".">
+
+	<description>Build the testlink-api-client.jar</description>
+
+	<tstamp>
+		<format property="dist.date" pattern="yyyyMMdd" locale="en,US"/>
+	</tstamp>
+
+	<!-- set global properties for this build -->
+	<property name="src.home" value="../src"/>
+	<property name="dist.builtlibs.home" value="../built-testlink-libs"/>
+	<property name="dist.home" value="${dist.builtlibs.home}/testlink-api-client-${dist.date}"/>
+	<property name="compile.home" value="../bin"/>
+	<property name="compile.lib" value="../lib"/>
+	<property name="dist.version" value="3.0"/>
+	<property name="dist.prefix" value="testlink-api-client-${dist.version}"/>
+	<property name="dist.jar" value="${dist.home}/${dist.prefix}.jar"/>
+	<property name="dist.zip" value="${dist.prefix}.zip"/>
+	<property name="dist.tar" value="${dist.prefix}.tar"/>
+	<property name="javadoc.home" value="${dist.home}/javadoc"/>
+	<property name="javadoc.include" value="testlink/api/java/client/**"/>
+	<property name="javadoc.exclude" value="testlink/api/java/client/junit/**"/>
+    
+	<path id="local.classpath">
+		<fileset dir="${compile.lib}">
+			<include name="**/*.jar"/>
+		</fileset>
+	</path>
+
+	<target name="init">
+		<mkdir dir="${dist.builtlibs.home}"/>
+		<delete dir="${dist.home}"/>
+		<mkdir dir="${compile.home}"/>
+		<mkdir dir="${dist.home}"/>
+		<mkdir dir="${javadoc.home}"/>
+		<mkdir dir="${dist.home}/lib"/>
+	</target>
+
+
+	<target name="compile" depends="init">
+		<javac fork="true" destdir="${compile.home}"
+ 			classpathref="local.classpath"
+			memoryinitialsize="256m"       
+			memorymaximumsize="512m"
+			deprecation="yes"
+			debug="yes"
+			source="1.5"
+			target="1.5"
+			nowarn="true"
+			debuglevel="lines,vars,source">
+			<src path="${src.home}"/>
+		</javac>
+	</target>
+
+	<target name="dist" depends="compile,documentation" description="Generate the TestLink API Client distribution">
+		<copy todir="${dist.home}/lib" preservelastmodified="true">
+			<fileset dir="${compile.lib}" includes="**/*.jar"/>
+		</copy>
+		<jar jarfile="${dist.jar}" basedir="${compile.home}"/>
+		<tar destfile="${dist.tar}" basedir="." includes="${dist.home}/**"/>		
+		<zip destfile="${dist.zip}" basedir="." includes="${dist.home}/**"/>		
+		<gzip destfile="${dist.tar}.gz" src="${dist.tar}"/>
+	</target>
+
+	<target name="documentation" depends="init">
+		<javadoc
+			destdir="${javadoc.home}"
+			author="true"
+			version="true"
+			use="true"
+			windowtitle="Test API">
+	
+			<packageset dir="${src.home}" defaultexcludes="yes">
+				<include name="${javadoc.include}"/>
+				<exclude name="${javadoc.exclude}"/>
+			</packageset>
+	
+			<doctitle><![CDATA[<h1>TestLink API Java Client</h1>]]></doctitle>
+			<bottom><![CDATA[<i>Copyright &#169; 2009 Database Facade. All Rights Reserved.</i>]]></bottom>
+			<group title="TestLink API Client Package" packages="testlink.api.*"/>
+		</javadoc>
+	</target>
+	
+
+</project>
