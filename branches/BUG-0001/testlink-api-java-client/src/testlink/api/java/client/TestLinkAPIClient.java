@@ -22,7 +22,12 @@ package testlink.api.java.client;
 
 
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.Map;
+
 import org.apache.xmlrpc.client.XmlRpcClient;
 import org.apache.xmlrpc.client.XmlRpcClientConfigImpl;
 
@@ -288,13 +293,23 @@ public class TestLinkAPIClient implements TestLinkAPIConst
 	 * @param projectName		Required
 	 * @param testCasePrefix	Required
 	 * @param description		Required
+	 * @param enableRequirements 	Optional
+	 * @param enableTestPriority 	Optional
+	 * @param enableTestAutomation 	Optional
+	 * @param enableInventoy 		Optional
 	 * @return The identifier for the created test project.
 	 * @throws TestLinkAPIException
 	 */
 	public Integer createTestProject(
 		String projectName,
 		String testCasePrefix,
-		String description) throws TestLinkAPIException
+		String description,
+		Boolean enableRequirements, 
+		Boolean enableTestPriority, 
+		Boolean enableTestAutomation,
+		Boolean enableInventory,
+		Boolean active, 
+		Boolean publicParam) throws TestLinkAPIException
 	{ 
 		initCache();
 		Hashtable params = new Hashtable();				
@@ -302,8 +317,47 @@ public class TestLinkAPIClient implements TestLinkAPIConst
 		setParam(params, REQUIRED, API_PARAM_TEST_PROJECT_NAME, projectName);
 		setParam(params, REQUIRED, API_PARAM_TEST_CASE_PREFIX, testCasePrefix);
 		setParam(params, REQUIRED, API_PARAM_NOTES, description);
+		
+		setParam(params, OPTIONAL, API_PARAM_ENABLE_REQUIREMENTS, enableRequirements);
+		setParam(params, OPTIONAL, API_PARAM_ENABLE_TEST_PRIORITY, enableTestPriority);
+		setParam(params, OPTIONAL, API_PARAM_ENABLE_TEST_AUTOMATION, enableTestAutomation);
+		setParam(params, OPTIONAL, API_PARAM_ENABLE_INVENTORY, enableInventory);
+		
+		setParam(params, OPTIONAL, API_PARAM_ACTIVE, active);
+		setParam(params, OPTIONAL, API_PARAM_PUBLIC, publicParam);
+		
 		TestLinkAPIResults results = executeXmlRpcMethod(API_METHOD_CREATE_PROJECT, params);
 		return getCreatedRecordIdentifier(results, API_RESULT_IDENTIFIER);
+	}
+	
+	/**
+	 * Create a new project in TestLink database.
+	 * 
+	 * @param projectName		Required
+	 * @param testCasePrefix	Required
+	 * @param description		Required
+	 * @param enableRequirements 	Optional
+	 * @param enableTestPriority 	Optional
+	 * @param enableTestAutomation 	Optional
+	 * @param enableInventoy 		Optional
+	 * @return The identifier for the created test project.
+	 * @throws TestLinkAPIException
+	 */
+	public Integer createTestProject(
+		String projectName, 
+		String testCasePrefix,
+		String description) throws TestLinkAPIException
+	{
+		return this.createTestProject(
+				projectName, 
+				testCasePrefix, 
+				description,
+				false,
+				false,
+				false,
+				false, 
+				true,
+				true);
 	}
 	
 	/**
