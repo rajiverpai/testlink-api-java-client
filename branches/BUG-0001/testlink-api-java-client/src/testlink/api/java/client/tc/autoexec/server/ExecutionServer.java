@@ -53,14 +53,14 @@ public class ExecutionServer
 {
 	private int port;
 	private TestLinkAPIClient apiClient;
-	private Map testPlans = new HashMap();
+	private Map<Object, Object> testPlans = new HashMap<Object, Object>();
 	private TestPlanPrepare prep;
 	private String defaultTestCaseUser;
 	private String externalDir;
 	private PrintWriter messageSend;
 	private BufferedReader messageReceive;
 	private boolean isConnected = false;
-	private ArrayList clients = new ArrayList();
+	private ArrayList<Object> clients = new ArrayList<Object>();
 
 	/**
 	 * The execution server expects a test plan that has

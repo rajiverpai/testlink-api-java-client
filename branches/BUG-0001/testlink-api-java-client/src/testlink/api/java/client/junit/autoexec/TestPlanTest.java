@@ -103,7 +103,7 @@ public class TestPlanTest implements TestLinkAPIConst,
 	{
 		try {
 			planLoader = new TestPlanLoader(JUNIT_STATIC_PROJECT, api);
-			Map plans = planLoader.getPlans();
+			Map<Integer, TestLinkTestPlan> plans = planLoader.getPlans();
 			System.out.println(planLoader.toString());
 			System.out.println(plans.toString());
 		} catch ( Exception e ) {
@@ -120,7 +120,7 @@ public class TestPlanTest implements TestLinkAPIConst,
 	{
 		try {
 			int cnt = 0;
-			Iterator ids = planLoader.getPlanIDs();
+			Iterator<Integer> ids = planLoader.getPlanIDs();
 			while ( ids.hasNext() ) {
 				Object id = ids.next();
 				TestLinkTestPlan plan = planLoader.getPlan(id);
@@ -149,7 +149,7 @@ public class TestPlanTest implements TestLinkAPIConst,
 	{
 		try {
 			int cnt = 0;
-			Iterator ids = planLoader.getPlanIDs();
+			Iterator<Integer> ids = planLoader.getPlanIDs();
 			while ( ids.hasNext() ) {
 				Object id = ids.next();
 				TestLinkTestPlan plan = planLoader.getPlan(id);

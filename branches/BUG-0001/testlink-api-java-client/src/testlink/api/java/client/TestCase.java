@@ -58,7 +58,7 @@ public interface TestCase
 	public void initExistingCase(
 		TestLinkTestProject testProject,
 		TestLinkTestSuite testSuite,
-		Map testCaseInfo) throws TestLinkAPIException;
+		Map<Object, Object> testCaseInfo) throws TestLinkAPIException;
 	
 	/**
 	 * Get the name of the project with which the test case is associated.

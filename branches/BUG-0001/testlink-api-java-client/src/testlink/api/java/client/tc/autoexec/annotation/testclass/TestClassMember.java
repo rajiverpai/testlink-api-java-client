@@ -25,6 +25,6 @@ import java.util.List;
 
 public interface TestClassMember {
 	public String getName();
-	public boolean isShadowedBy(List members);
+	public boolean isShadowedBy(List<TestClassMember> members);
 	public Annotation[] getAnnotations();
 }

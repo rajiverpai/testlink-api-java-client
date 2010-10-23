@@ -47,11 +47,11 @@ public class RemoteClientConnection
 	private PrintWriter messageSend = null;
 	private BufferedReader messageReceive = null;
 	private int port = -1;
-	private Map messageCache = new HashMap();
+	private Map<Object, Object> messageCache = new HashMap<Object, Object>();
 	private boolean cacheLocked = false;
 	private Random randomizer = new Random(new Date().getTime());
 	private boolean isClosed = false;
-	private ArrayList listeners = new ArrayList();
+	private ArrayList<Object> listeners = new ArrayList<Object>();
 	
 	/**
 	 * Restrict to the package.
@@ -156,6 +156,7 @@ public class RemoteClientConnection
 	 * @return
 	 * @throws Exception
 	 */
+	@SuppressWarnings("unchecked")
 	public String receiveMessage(
 		String client) throws Exception
 	{
@@ -167,7 +168,7 @@ public class RemoteClientConnection
 		waitForCache();
 		cacheLocked = true;
 		try {
-			Vector messages = (Vector) messageCache.get(client);
+			Vector<Object> messages = (Vector<Object>) messageCache.get(client);
 			if ( messages != null ) {
 				if ( messages.size() != 0 ) {
 					String fromServer = (String) messages.get(0);
@@ -216,6 +217,7 @@ public class RemoteClientConnection
 		return port;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void cacheMessage(
 		String fromServer)
 	{
@@ -232,9 +234,9 @@ public class RemoteClientConnection
 		waitForCache();
 		cacheLocked = true;
 		try {
-			Vector messages = (Vector) messageCache.get(client);
+			Vector<Object> messages = (Vector<Object>) messageCache.get(client);
 			if ( messages == null ) {
-				messages = new Vector();
+				messages = new Vector<Object>();
 				messageCache.put(client, messages);
 			}
 			messages.add(fromServer);

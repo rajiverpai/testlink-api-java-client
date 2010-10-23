@@ -27,7 +27,7 @@ import java.util.Map;
 
 public class RemoteConnectionManager
 {
-	private static Map connections = new HashMap();
+	private static Map<Object, Object> connections = new HashMap<Object, Object>();
 	
 	public static RemoteClientConnection getOrCreateConnection(
 		int port)

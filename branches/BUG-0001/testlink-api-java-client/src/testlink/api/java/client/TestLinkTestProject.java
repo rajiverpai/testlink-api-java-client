@@ -135,15 +135,11 @@ public class TestLinkTestProject
 		}
 		
 		// Get project info
-		Map projectInfo = null;
+		Map<Object, Object> projectInfo = null;
 		try {
 			projectInfo = TestLinkAPIHelper.getProjectInfo(apiClient, projectID);
 		} catch ( Exception e ) {
 			throw new TestLinkAPIException("The project info could not be acquired.", e);
-		}
-		if ( projectID == null ) {
-			throw new TestLinkAPIException(
-				"The project information cannot be null for this constructor.");
 		}
 		
 		init(projectInfo);
@@ -158,13 +154,13 @@ public class TestLinkTestProject
 	 * @throws TestLinkAPIException
 	 */
 	public TestLinkTestProject(
-		Map projectInfo) throws TestLinkAPIException
+		Map<Object, Object> projectInfo) throws TestLinkAPIException
 	{
 		init(projectInfo);
 	}
 	
 	private void init(
-		Map projectInfo) throws TestLinkAPIException
+		Map<Object, Object> projectInfo) throws TestLinkAPIException
 	{
 		if ( projectInfo == null ) {
 			throw new TestLinkAPIException(

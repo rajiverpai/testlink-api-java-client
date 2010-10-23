@@ -31,34 +31,23 @@ import testlink.api.java.client.TestCase;
  * @author Daniel Padilla
  *
  */
-public class TestCaseExecOrderCompare implements Comparator {
-	public int compare(Object o1, Object o2) {
+public class TestCaseExecOrderCompare implements Comparator<TestCase> {
+	public int compare(TestCase tc1, TestCase tc2) {
 		
 		// Both null
-		if ( o1 == null && o2 == null ) {
+		if ( tc1 == null && tc2 == null ) {
 			return 0;
 		}
 		
 		// Null < value
-		if ( o1 == null && o2 != null ) {
+		if ( tc1 == null && tc2 != null ) {
 			return -1;
 		}
 		
 		// value > null
-		if ( o1 != null && o2 == null ) {
+		if ( tc1 != null && tc2 == null ) {
 			return 1;
 		}
-		
-		if ( !(o1 instanceof TestCase) ) {
-			throw new ClassCastException("The object is not of type TestCase.");
-		}
-		
-		if ( !(o2 instanceof TestCase) ) {
-			throw new ClassCastException("The object is not of type TestCase.");
-		}
-		
-		TestCase tc1 = (TestCase) o1;
-		TestCase tc2 = (TestCase) o2;
 		
 		if ( tc1.getExecOrder() == tc2.getExecOrder() ) {
 			if (  tc1.getTestCaseVisibleID() != null && tc2.getTestCaseVisibleID() != null ) {

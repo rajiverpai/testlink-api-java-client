@@ -34,7 +34,7 @@ public class TestClassMethod implements TestClassMember {
 		return method.getName();
 	}
 	
-	public boolean isShadowedBy(List members) {
+	public boolean isShadowedBy(List<TestClassMember> members) {
 		return false;
 	}
 	

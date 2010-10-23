@@ -73,7 +73,7 @@ public class TestLinkTestSuite {
 	 * @throws TestLinkAPIException
 	 */
 	public TestLinkTestSuite(
-		Map suiteInfo) throws TestLinkAPIException
+		Map<Object, Object> suiteInfo) throws TestLinkAPIException
 	{
 		if ( suiteInfo == null ) {
 			throw new TestLinkAPIException("The TestSuite class object instance could not be created.");

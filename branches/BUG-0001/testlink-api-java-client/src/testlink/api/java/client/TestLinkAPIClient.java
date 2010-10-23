@@ -60,7 +60,7 @@ public class TestLinkAPIClient implements TestLinkAPIConst
 	public boolean isConnected=false;
 	public String connectErrorMsg="";
 	boolean useCache = false;
-	Map cacheList = new HashMap();
+	Map<String, Object> cacheList = new HashMap<String, Object>();
 	
 	/* API Initialization variables */
 	
@@ -145,7 +145,7 @@ public class TestLinkAPIClient implements TestLinkAPIConst
 	 */
 	public TestLinkAPIResults about() throws TestLinkAPIException
 	{
-		Hashtable params = new Hashtable();				
+		Hashtable<String, Object> params = new Hashtable<String, Object>();				
 		setParam(params, REQUIRED, API_PARAM_DEV_KEY, DEV_KEY);
 		return execXmlRpcMethodWithCache(API_METHOD_ABOUT, params, null);
 	}
@@ -158,7 +158,7 @@ public class TestLinkAPIClient implements TestLinkAPIConst
 	 */
 	public TestLinkAPIResults ping() throws TestLinkAPIException
 	{
-		Hashtable params = new Hashtable();				
+		Hashtable<String, Object> params = new Hashtable<String, Object>();				
 		setParam(params, REQUIRED, API_PARAM_DEV_KEY, DEV_KEY);
 		return execXmlRpcMethodWithCache(API_METHOD_PING, params, null);
 	}
@@ -275,7 +275,7 @@ public class TestLinkAPIClient implements TestLinkAPIConst
 		String  execNotes,
 		String  testResultStatus) throws TestLinkAPIException
 	{ 
-		Hashtable params = new Hashtable();				
+		Hashtable<String, Object> params = new Hashtable<String, Object>();				
 		setParam(params, REQUIRED, API_PARAM_DEV_KEY, DEV_KEY);
 		setParam(params, REQUIRED, API_PARAM_TEST_PLAN_ID, testPlanID);
 		setParam(params, REQUIRED, API_PARAM_TEST_CASE_ID, testCaseID);
@@ -312,16 +312,19 @@ public class TestLinkAPIClient implements TestLinkAPIConst
 		Boolean publicParam) throws TestLinkAPIException
 	{ 
 		initCache();
-		Hashtable params = new Hashtable();				
+		Hashtable<String, Object> params = new Hashtable<String, Object>();				
 		setParam(params, REQUIRED, API_PARAM_DEV_KEY, DEV_KEY);
 		setParam(params, REQUIRED, API_PARAM_TEST_PROJECT_NAME, projectName);
 		setParam(params, REQUIRED, API_PARAM_TEST_CASE_PREFIX, testCasePrefix);
 		setParam(params, REQUIRED, API_PARAM_NOTES, description);
 		
-		setParam(params, OPTIONAL, API_PARAM_ENABLE_REQUIREMENTS, enableRequirements);
-		setParam(params, OPTIONAL, API_PARAM_ENABLE_TEST_PRIORITY, enableTestPriority);
-		setParam(params, OPTIONAL, API_PARAM_ENABLE_TEST_AUTOMATION, enableTestAutomation);
-		setParam(params, OPTIONAL, API_PARAM_ENABLE_INVENTORY, enableInventory);
+		Hashtable<String, Object> options = new Hashtable<String, Object>();
+		options.put(API_PARAM_ENABLE_REQUIREMENTS, enableRequirements );
+		options.put(API_PARAM_ENABLE_TEST_PRIORITY, enableTestPriority );
+		options.put(API_PARAM_ENABLE_TEST_AUTOMATION, enableTestAutomation );
+		options.put(API_PARAM_ENABLE_INVENTORY, enableInventory);
+								
+		setParam(params, OPTIONAL, "options", options);
 		
 		setParam(params, OPTIONAL, API_PARAM_ACTIVE, active);
 		setParam(params, OPTIONAL, API_PARAM_PUBLIC, publicParam);
@@ -356,8 +359,8 @@ public class TestLinkAPIClient implements TestLinkAPIConst
 				false,
 				false,
 				false, 
-				true,
-				true);
+				false,
+				false);
 	}
 	
 	/**
@@ -423,7 +426,7 @@ public class TestLinkAPIClient implements TestLinkAPIConst
 		Boolean check) throws TestLinkAPIException
 	{
 		initCache();
-		Hashtable params = new Hashtable();				
+		Hashtable<String, Object> params = new Hashtable<String, Object>();				
 		setParam(params, REQUIRED, API_PARAM_DEV_KEY, DEV_KEY);
 		setParam(params, REQUIRED, API_PARAM_TEST_PROJECT_ID, projectID.toString());
 		setParam(params, REQUIRED, API_PARAM_TEST_SUITE_NAME, suiteName);
@@ -499,7 +502,7 @@ public class TestLinkAPIClient implements TestLinkAPIConst
 		String importance) throws TestLinkAPIException
 	{
 		initCache();
-		Hashtable params = new Hashtable();	
+		Hashtable<String, Object> params = new Hashtable<String, Object>();	
 		setParam(params, REQUIRED, API_PARAM_DEV_KEY, DEV_KEY);
 		setParam(params, REQUIRED, API_PARAM_AUTHOR_LOGIN, authorLoginName);
 		setParam(params, REQUIRED, API_PARAM_TEST_PROJECT_ID, projectID);
@@ -621,7 +624,7 @@ public class TestLinkAPIClient implements TestLinkAPIConst
 		String buildNotes) throws TestLinkAPIException
 	{
 		initCache();
-		Hashtable params = new Hashtable();	
+		Hashtable<String, Object> params = new Hashtable<String, Object>();	
 		setParam(params, REQUIRED, API_PARAM_DEV_KEY, DEV_KEY);
 		setParam(params, REQUIRED, API_PARAM_TEST_PLAN_ID, planID);
 		setParam(params, REQUIRED, API_PARAM_BUILD_NAME, buildName);
@@ -650,7 +653,7 @@ public class TestLinkAPIClient implements TestLinkAPIConst
 		int maxNode = 0;
 		TestLinkAPIResults cases = getCasesForTestPlan(projectName, planName);
 		for ( int i = 0; i < cases.size(); i++ ) {
-			Map data = cases.getData(i);
+			Map<?, ?> data = cases.getData(i);
 			Object node = data.get("execution_order");
 			if ( node != null ) {
 				try {
@@ -702,13 +705,13 @@ public class TestLinkAPIClient implements TestLinkAPIConst
 				"The test case " + testCaseName + " was not found and the test case"
 				+ " could not be appended to test plan " + planName + ".");
 		}
-		Map caseInfo = TestLinkAPIHelper.getTestCaseInfo(this, projectID, caseID);
+		Map<?, ?> caseInfo = TestLinkAPIHelper.getTestCaseInfo(this, projectID, caseID);
 		if ( caseInfo == null ) {
 			throw new TestLinkAPIException(
 				"The test case identifier " + caseID + " was not found and the test case "
 				+ testCaseName + " could not be appended to test plan " + planName + ".");
 		}
-		Map projectInfo = TestLinkAPIHelper.getProjectInfo(this, projectName);
+		Map<?, ?> projectInfo = TestLinkAPIHelper.getProjectInfo(this, projectName);
 		if ( projectInfo == null ) {
 			throw new TestLinkAPIException(
 				"The project information for " + projectName
@@ -746,7 +749,7 @@ public class TestLinkAPIClient implements TestLinkAPIConst
 		String urgency) throws TestLinkAPIException
 	{
 		initCache();
-		Hashtable params = new Hashtable();	
+		Hashtable<String, Object> params = new Hashtable<String, Object>();	
 		setParam(params, REQUIRED, API_PARAM_DEV_KEY, DEV_KEY);
 		setParam(params, REQUIRED, API_PARAM_TEST_PROJECT_ID, projectID);
 		setParam(params, REQUIRED, API_PARAM_TEST_PLAN_ID, planID);
@@ -765,7 +768,7 @@ public class TestLinkAPIClient implements TestLinkAPIConst
 			throw new TestLinkAPIException(
 				"Could not add test case " + testCaseVisibleID + " to test plan id " + planID);
 		}
-		Map data = results.getData(0);
+		Map<?, ?> data = results.getData(0);
 		if ( hasError(data) ) {
 			throw new TestLinkAPIException(
 				"Could not add test case " + testCaseVisibleID + " to test plan id " + planID
@@ -781,7 +784,7 @@ public class TestLinkAPIClient implements TestLinkAPIConst
 	 */
 	public TestLinkAPIResults getProjects() throws TestLinkAPIException
 	{
-		Hashtable params = new Hashtable();	
+		Hashtable<String, Object> params = new Hashtable<String, Object>();	
 		setParam(params, REQUIRED, API_PARAM_DEV_KEY, DEV_KEY);
 		return execXmlRpcMethodWithCache(API_METHOD_GET_PROJECTS, params, "projects");
 	}
@@ -810,7 +813,7 @@ public class TestLinkAPIClient implements TestLinkAPIConst
 	public TestLinkAPIResults getProjectTestPlans(
 		Integer projectID) throws TestLinkAPIException
 	{
-		Hashtable params = new Hashtable();	
+		Hashtable<String, Object> params = new Hashtable<String, Object>();	
 		setParam(params, REQUIRED, API_PARAM_DEV_KEY, DEV_KEY);
 		setParam(params, REQUIRED, API_PARAM_TEST_PROJECT_ID, projectID);		
 		return execXmlRpcMethodWithCache(API_METHOD_GET_PROJECT_TEST_PLANS, params,
@@ -851,7 +854,7 @@ public class TestLinkAPIClient implements TestLinkAPIConst
 	public TestLinkAPIResults getBuildsForTestPlan(
 		Integer planID) throws TestLinkAPIException
 	{
-		Hashtable params = new Hashtable();	
+		Hashtable<String, Object> params = new Hashtable<String, Object>();	
 		setParam(params, REQUIRED, API_PARAM_DEV_KEY, DEV_KEY);
 		setParam(params, REQUIRED, API_PARAM_TEST_PLAN_ID, planID);			
 		return execXmlRpcMethodWithCache(API_METHOD_GET_BUILDS_FOR_PLAN, params, planID);
@@ -891,7 +894,7 @@ public class TestLinkAPIClient implements TestLinkAPIConst
 	public TestLinkAPIResults getLatestBuildForTestPlan(
 		Integer planID) throws TestLinkAPIException
 	{
-		Hashtable params = new Hashtable();	
+		Hashtable<String, Object> params = new Hashtable<String, Object>();	
 		setParam(params, REQUIRED, API_PARAM_DEV_KEY, DEV_KEY);
 		setParam(params, REQUIRED, API_PARAM_TEST_PLAN_ID, planID);			
 		return execXmlRpcMethodWithCache(API_METHOD_GET_LATEST_BUILD_FOR_PLAN, params,
@@ -922,7 +925,7 @@ public class TestLinkAPIClient implements TestLinkAPIConst
 	public TestLinkAPIResults getFirstLevelTestSuitesForTestProject(
 		Integer projectID) throws TestLinkAPIException
 	{
-		Hashtable params = new Hashtable();	
+		Hashtable<String, Object> params = new Hashtable<String, Object>();	
 		setParam(params, REQUIRED, API_PARAM_DEV_KEY, DEV_KEY);
 		setParam(params, REQUIRED, API_PARAM_TEST_PROJECT_ID, projectID);
 		return execXmlRpcMethodWithCache(API_METHOD_GET_FIRST_LEVEL_SUITES_FOR_PROJECT,
@@ -957,7 +960,7 @@ public class TestLinkAPIClient implements TestLinkAPIConst
 		String testProjectName,
 		String testSuiteName) throws TestLinkAPIException
 	{ 
-		Hashtable params = new Hashtable();				
+		Hashtable<String, Object> params = new Hashtable<String, Object>();				
 		setParam(params, REQUIRED, API_PARAM_DEV_KEY, DEV_KEY);
 		setParam(params, REQUIRED, API_PARAM_TEST_CASE_NAME, testCaseName);
 		setParam(params, OPTIONAL, API_PARAM_TEST_PROJECT_NAME, testProjectName);
@@ -978,7 +981,7 @@ public class TestLinkAPIClient implements TestLinkAPIConst
 		Integer testSuiteID) throws TestLinkAPIException
 	{ 
 		String key = testProjectID.toString() + "-" + testSuiteID.toString();
-		Hashtable params = new Hashtable();				
+		Hashtable<String, Object> params = new Hashtable<String, Object>();				
 		setParam(params, REQUIRED, API_PARAM_DEV_KEY, DEV_KEY);
 		setParam(params, REQUIRED, API_PARAM_TEST_PROJECT_ID, testProjectID);
 		setParam(params, REQUIRED, API_PARAM_TEST_SUITE_ID, testSuiteID);
@@ -1023,7 +1026,7 @@ public class TestLinkAPIClient implements TestLinkAPIConst
 		Integer testPlanID
 		) throws TestLinkAPIException
 	{ 
-		Hashtable params = new Hashtable();				
+		Hashtable<String, Object> params = new Hashtable<String, Object>();				
 		setParam(params, REQUIRED, API_PARAM_DEV_KEY, DEV_KEY);
 		setParam(params, REQUIRED, API_PARAM_TEST_PLAN_ID, testPlanID);
 		return execXmlRpcMethodWithCache(API_METHOD_GET_SUITES_FOR_PLAN, params,
@@ -1078,7 +1081,7 @@ public class TestLinkAPIClient implements TestLinkAPIConst
 		Integer testPlanID,
 		Integer testCaseID) throws TestLinkAPIException
 	{
-		Hashtable params = new Hashtable(); 
+		Hashtable<String, Object> params = new Hashtable<String, Object>(); 
 		setParam(params, REQUIRED, API_PARAM_DEV_KEY, DEV_KEY);
 		setParam(params, REQUIRED, API_PARAM_TEST_PLAN_ID, testPlanID);
 		setParam(params, REQUIRED, API_PARAM_TEST_CASE_ID, testCaseID);
@@ -1190,7 +1193,7 @@ public class TestLinkAPIClient implements TestLinkAPIConst
 		}
 				
 		// Setup hash parameters
-		Hashtable params = new Hashtable();				
+		Hashtable<String, Object> params = new Hashtable<String, Object>();				
 		setParam(params, REQUIRED, API_PARAM_DEV_KEY, DEV_KEY);
 		setParam(params, REQUIRED, API_PARAM_TEST_PLAN_ID, testPlanID);
 		setParam(params, OPTIONAL, API_PARAM_TEST_CASE_ID, testCaseID);
@@ -1213,6 +1216,7 @@ public class TestLinkAPIClient implements TestLinkAPIConst
 	/*
 	 * Initialize the cache
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private void initCache()
 	{
 		cacheList = new HashMap();
@@ -1228,6 +1232,7 @@ public class TestLinkAPIClient implements TestLinkAPIConst
 	 * @return The results from the TestLink API as a list of Map entries
 	 * @throws TestLinkAPIException
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private TestLinkAPIResults execXmlRpcMethodWithCache(
 		String method,
 		Hashtable params,
@@ -1278,6 +1283,7 @@ public class TestLinkAPIClient implements TestLinkAPIConst
 	 * to the TestLink api URL.
 	 */
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private TestLinkAPIResults executeXmlRpcMethod(
 		String method,
 		Hashtable executionData) throws TestLinkAPIException
@@ -1369,7 +1375,7 @@ public class TestLinkAPIClient implements TestLinkAPIConst
 	 * Assign the parameter
 	 */
 	private void setParam(
-		Hashtable params, 
+		Hashtable<String, Object> params, 
 		boolean isRequired, 
 		String paramName, 
 		Object value) throws TestLinkAPIException
@@ -1386,14 +1392,19 @@ public class TestLinkAPIClient implements TestLinkAPIConst
 		}
 		
 		// Set the parameter for the XML-RPC call
-		try {
-			Integer intTypeValue = new Integer(value.toString());
-			params.put(paramName, intTypeValue);
-		} catch ( Exception e ) {
-			params.put(paramName, value.toString());
-		}
+		// No need for these verifications anymore, as the xmlrpc API handles 
+		// different types put into the param map
+//		try {
+//			Integer intTypeValue = new Integer(value.toString());
+//			params.put(paramName, intTypeValue);
+//		} catch ( Exception e ) {
+//			params.put(paramName, value);
+//		}
+		
+		params.put( paramName, value );
 	}
 	
+	@SuppressWarnings("rawtypes")
 	private Integer getCreatedRecordIdentifier(
 		TestLinkAPIResults results,
 		String idKey) throws TestLinkAPIException
@@ -1436,6 +1447,7 @@ public class TestLinkAPIClient implements TestLinkAPIConst
 		}
 	}
 	
+	@SuppressWarnings("rawtypes")
 	private boolean hasError(
 		Map data)
 	{

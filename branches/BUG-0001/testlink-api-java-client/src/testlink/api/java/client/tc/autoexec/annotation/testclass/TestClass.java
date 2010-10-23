@@ -52,6 +52,7 @@ public class TestClass {
 		}
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private void addToAnnotationLists(TestClassMember member, Map map) {
 		for (Annotation each : member.getAnnotations()) {
 			Class<? extends Annotation> type= each.annotationType();

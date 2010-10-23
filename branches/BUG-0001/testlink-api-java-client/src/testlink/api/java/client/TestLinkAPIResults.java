@@ -38,23 +38,24 @@ import java.util.Map;
  */
 public class TestLinkAPIResults implements TestLinkAPIConst
 {
-	ArrayList<Map> results = new ArrayList<Map>();
+	ArrayList<Map<Object, Object>> results = new ArrayList<Map<Object, Object>>();
 
 	/**
 	 * Add a result to the list.
 	 * 
 	 * @param item
 	 */
+	@SuppressWarnings("unchecked")
 	public void add(
-		Map item)
+		Map<Object, Object> item)
 	{
 		// Inspect the item first. If it is a map of maps
 		// then get the individual hashes.
 		if ( isMapOfMaps(item) ) {
-			Iterator keys = item.keySet().iterator();
+			Iterator<Object> keys = item.keySet().iterator();
 			while ( keys.hasNext() ) {
 				Object key = keys.next();
-				Map innerMap = (Map) item.get(key);
+				Map<Object, Object> innerMap = (Map<Object, Object>) item.get(key);
 				if ( innerMap != null ) {
 					results.add(innerMap);
 				}
@@ -81,10 +82,10 @@ public class TestLinkAPIResults implements TestLinkAPIConst
 	 * @param index
 	 * @return
 	 */
-	public Map getData(
+	public Map<Object, Object> getData(
 		int index)
 	{
-		return (Map) results.get(index);
+		return (Map<Object, Object>) results.get(index);
 	}
 	
 	/**
@@ -98,7 +99,7 @@ public class TestLinkAPIResults implements TestLinkAPIConst
 		int index,
 		String name)
 	{
-		Map result = getData(index);
+		Map<Object, Object> result = getData(index);
 		return getValueByName(result, name);
 	}
 	
@@ -109,13 +110,14 @@ public class TestLinkAPIResults implements TestLinkAPIConst
 	 * @param name
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public Object getValueByName(
-		Map result,
+		Map<Object, Object> result,
 		String name)
 	{
 		Object value = result.get(name);
 		if ( value == null ) {
-			Iterator mapKeys = result.keySet().iterator();
+			Iterator<Object> mapKeys = result.keySet().iterator();
 			while ( mapKeys.hasNext() ) {
 				Object internalKey = mapKeys.next();
 				Object internalData = result.get(internalKey);
@@ -123,7 +125,7 @@ public class TestLinkAPIResults implements TestLinkAPIConst
 					continue;
 				}
 				if ( internalData instanceof Map ) {
-					Map internalMap = (Map) internalData;
+					Map<Object, Object> internalMap = (Map<Object, Object>) internalData;
 					value = internalMap.get(name);
 					if ( value != null ) {
 						return value;
@@ -137,9 +139,9 @@ public class TestLinkAPIResults implements TestLinkAPIConst
 	}
 	
 	private boolean isMapOfMaps(
-		Map map)
+		Map<Object, Object> map)
 	{
-		Iterator keys = map.keySet().iterator();
+		Iterator<Object> keys = map.keySet().iterator();
 		while ( keys.hasNext() ) {
 			Object key = keys.next();
 			Object data = map.get(key);

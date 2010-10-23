@@ -82,7 +82,7 @@ public class ExecutableTestCaseTest implements TestLinkAPIConst, TestConst
 	public void testTestPlanConstructor()
 	{
 		try {
-			Map projectInfo= TestLinkAPIHelper.getProjectInfo(api, JUNIT_STATIC_PROJECT);
+			Map<Object, Object> projectInfo= TestLinkAPIHelper.getProjectInfo(api, JUNIT_STATIC_PROJECT);
 			TestLinkTestProject project = new TestLinkTestProject(projectInfo);
 			project.getProjectID();
 		} catch ( Exception e ) {
@@ -103,9 +103,9 @@ public class ExecutableTestCaseTest implements TestLinkAPIConst, TestConst
 			Integer caseID = TestLinkAPIHelper.getCaseIDByName(api, projectID, JUNIT_STATIC_CASE);
 			
 			// Get information for the ids
-			Map testCaseInfo = TestLinkAPIHelper.getTestCaseInfo(api, projectID, caseID);
-			Map projectInfo= TestLinkAPIHelper.getProjectInfo(api, JUNIT_STATIC_PROJECT);
-			Map suiteInfo = TestLinkAPIHelper.getSuiteInfo(api, projectID, JUNIT_STATIC_SUITE);
+			Map<Object, Object> testCaseInfo = TestLinkAPIHelper.getTestCaseInfo(api, projectID, caseID);
+			Map<Object, Object> projectInfo= TestLinkAPIHelper.getProjectInfo(api, JUNIT_STATIC_PROJECT);
+			Map<Object, Object> suiteInfo = TestLinkAPIHelper.getSuiteInfo(api, projectID, JUNIT_STATIC_SUITE);
 			
 			// Create the classes
 			TestLinkTestProject testProject = new TestLinkTestProject(projectInfo);

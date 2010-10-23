@@ -30,7 +30,7 @@ import testlink.api.java.client.junit.constants.TestConst;
 public class VersionListTestRunner implements TestLinkAPIConst, TestConst
 {
 	private HashMap<String,
-	TestLinkAPIClient> apiList = new HashMap();
+	TestLinkAPIClient> apiList = new HashMap<String, TestLinkAPIClient>();
 
 	/**
      * The constructor sets up all known
@@ -51,7 +51,7 @@ public class VersionListTestRunner implements TestLinkAPIConst, TestConst
 		try {
 		    TestLinkAPIClient api;
 		    String version;
-			Iterator versions = apiList.keySet().iterator();
+			Iterator<String> versions = apiList.keySet().iterator();
 			while ( versions.hasNext() ) {
 				version = (String) versions.next();
 				api = apiList.get(version);
@@ -69,7 +69,7 @@ public class VersionListTestRunner implements TestLinkAPIConst, TestConst
 		
 		// Print out result summary
 		System.out.println("\n\n=======================================================");
-		Iterator versions = results.getVersions();
+		Iterator<String> versions = results.getVersions();
 		while ( versions.hasNext() ) {
 			String version = (String) versions.next();
 			Exception e = results.getResultException(version);

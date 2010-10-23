@@ -28,7 +28,7 @@ import java.util.Iterator;
 public class RunExceptionResults
 {
 	private HashMap<String,
-		Exception> results = new HashMap();
+		Exception> results = new HashMap<String, Exception>();
 	private boolean hasFailure=false;
 	private Exception latestFailure=null;
 	private String latestFailedVersion;
@@ -45,7 +45,7 @@ public class RunExceptionResults
 		results.put(version, e);
 	}
 
-	public Iterator getVersions()
+	public Iterator<String> getVersions()
 	{
 		return results.keySet().iterator();
 	}
@@ -53,7 +53,7 @@ public class RunExceptionResults
 	public Exception getResultException(
 		String version)
 	{
-		return (Exception) results.get(version);
+		return results.get(version);
 	}
 	
 	public boolean containsFailure() {
