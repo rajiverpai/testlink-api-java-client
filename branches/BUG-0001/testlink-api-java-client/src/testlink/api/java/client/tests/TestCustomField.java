@@ -1,7 +1,7 @@
 /**
  * 
  */
-package testlink.api.java.client.junit.autoexec;
+package testlink.api.java.client.tests;
 
 import org.junit.Before;
 import org.junit.Test;

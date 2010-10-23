@@ -23,6 +23,8 @@ package testlink.api.java.client.junit.client;
 
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.After;
@@ -223,7 +225,7 @@ public class TestLinkAPIRunMeFirstTest implements TestLinkAPIConst,
 				if ( createTestCase ) {
 					Integer id = api.createTestCase("admin", JUNIT_STATIC_PROJECT, 
 						JUNIT_STATIC_SUITE, JUNIT_STATIC_CASE, "JUnit created summary.",
-						"JUnit created steps.", "JUnit created expected results.", HIGH);
+						new ArrayList<HashMap<String, Object>>(), "JUnit created expected results.", HIGH);
 					if ( id == null || id.intValue() == 0 ) {
 						throw new Exception(
 							"Failed to create a test case for project " + JUNIT_STATIC_CASE
@@ -298,7 +300,7 @@ public class TestLinkAPIRunMeFirstTest implements TestLinkAPIConst,
 			{
 				Integer id = api.createTestCase("admin", JUNIT_STATIC_PROJECT, 
 					JUNIT_STATIC_SUITE, JUNIT_DYNAMIC_CASE, "JUnit created summary.",
-					"JUnit created steps.", "JUnit created expected results.", HIGH);
+					new ArrayList<HashMap<String, Object>>(), "JUnit created expected results.", HIGH);
 				if ( id == null ) {
 					throw new Exception(
 						"Unable to add test case to test plan suite. Version=" + version);

@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.xmlrpc.client.XmlRpcClient;
@@ -297,6 +298,8 @@ public class TestLinkAPIClient implements TestLinkAPIConst
 	 * @param enableTestPriority 	Optional
 	 * @param enableTestAutomation 	Optional
 	 * @param enableInventoy 		Optional
+	 * @param active 		Optional
+	 * @param publicParam 	Optional
 	 * @return The identifier for the created test project.
 	 * @throws TestLinkAPIException
 	 */
@@ -324,7 +327,7 @@ public class TestLinkAPIClient implements TestLinkAPIConst
 		options.put(API_PARAM_ENABLE_TEST_AUTOMATION, enableTestAutomation );
 		options.put(API_PARAM_ENABLE_INVENTORY, enableInventory);
 								
-		setParam(params, OPTIONAL, "options", options);
+		setParam(params, OPTIONAL, API_PARAM_OPTIONS, options);
 		
 		setParam(params, OPTIONAL, API_PARAM_ACTIVE, active);
 		setParam(params, OPTIONAL, API_PARAM_PUBLIC, publicParam);
@@ -456,7 +459,7 @@ public class TestLinkAPIClient implements TestLinkAPIConst
 		String suiteName,
 		String testCaseName,
 		String summary,
-		String steps,
+		List<HashMap<String, Object>> steps,
 		String expectedResults,
 		String importance) throws TestLinkAPIException
 	{
@@ -492,7 +495,7 @@ public class TestLinkAPIClient implements TestLinkAPIConst
 		Integer suiteID,
 		String caseName,
 		String summary,
-		String steps,
+		List<HashMap<String, Object>> steps,
 		String expectedResults,
 		Integer order,
 		Integer internalID,

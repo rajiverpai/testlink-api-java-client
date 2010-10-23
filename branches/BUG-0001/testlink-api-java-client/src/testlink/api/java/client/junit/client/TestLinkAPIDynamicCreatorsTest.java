@@ -23,7 +23,9 @@ package testlink.api.java.client.junit.client;
 
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import org.junit.After;
 import org.junit.Before;
@@ -168,7 +170,7 @@ public class TestLinkAPIDynamicCreatorsTest implements TestLinkAPIConst, TestCon
 				JUNIT_DYNAMIC_SUITE,
 				JUNIT_DYNAMIC_CASE, 
 				"JUnit created summary.",
-				"JUnit created steps.",
+				new ArrayList<HashMap<String, Object>>(),
 				"JUnit created expected results.", 
 				HIGH);
 			if ( id == null || id.intValue() == 0 ) {
@@ -203,7 +205,7 @@ public class TestLinkAPIDynamicCreatorsTest implements TestLinkAPIConst, TestCon
 				suiteID,
 				JUNIT_DYNAMIC_CASE, 
 				"JUnit created summary.",
-				"JUnit created steps.",
+				new ArrayList<HashMap<String, Object>>(),
 				"JUnit created expected results.", 
 				new Integer(2),
 				null,
@@ -243,7 +245,7 @@ public class TestLinkAPIDynamicCreatorsTest implements TestLinkAPIConst, TestCon
 				suiteID,
 				JUNIT_DYNAMIC_CASE, 
 				"JUnit created summary.",
-				"JUnit created steps.",
+				new ArrayList<HashMap<String, Object>>(),
 				"JUnit created expected results.", 
 				new Integer(3),
 				null,
@@ -303,7 +305,7 @@ public class TestLinkAPIDynamicCreatorsTest implements TestLinkAPIConst, TestCon
 					JUNIT_STATIC_SUITE,
 					JUNIT_STATIC_CASE, 
 					"JUnit created summary.",
-					"JUnit created steps.",
+					new ArrayList<HashMap<String, Object>>(),
 					"JUnit created expected results.", 
 					HIGH);
 			}
@@ -367,7 +369,7 @@ public class TestLinkAPIDynamicCreatorsTest implements TestLinkAPIConst, TestCon
 					JUNIT_STATIC_SUITE,
 					JUNIT_DYNAMIC_CASE, 
 					"JUnit created summary.",
-					"JUnit created steps.",
+					new ArrayList<HashMap<String, Object>>(),
 					"JUnit created expected results.", 
 					HIGH);
 			if ( id == null ) {
@@ -403,7 +405,7 @@ public class TestLinkAPIDynamicCreatorsTest implements TestLinkAPIConst, TestCon
 					JUNIT_STATIC_SUITE,
 					JUNIT_STATIC_CASE, 
 					"JUnit created summary.",
-					"JUnit created steps.",
+					new ArrayList<HashMap<String, Object>>(),
 					"JUnit created expected results.", 
 					HIGH);
 			if ( id == null ) {

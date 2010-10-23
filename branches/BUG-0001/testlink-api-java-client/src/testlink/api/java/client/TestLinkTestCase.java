@@ -23,6 +23,7 @@ package testlink.api.java.client;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import testlink.api.java.client.tc.autoexec.TestCaseExecutor;
@@ -45,7 +46,7 @@ public class TestLinkTestCase implements TestCase
 	private Integer execOrder = new Integer(5000);
 	private Integer execType = new Integer(TestLinkAPIConst.TESTCASE_EXECUTION_TYPE_MANUAL);
 	private String testCaseSummary;
-	private String testCaseSteps;
+	private List<HashMap<String, Object>> testCaseSteps;
 	private String testCaseExpectedResults;
 	private String testCaseVersion;
 	private String testCaseImportance = TestLinkAPIConst.MEDIUM;
@@ -103,6 +104,7 @@ public class TestLinkTestCase implements TestCase
 	 * 
 	 * @param testCase
 	 */
+	@SuppressWarnings("unchecked")
 	public void initExistingCase(
 		TestLinkTestProject projectInfo,
 		TestLinkTestSuite suiteInfo,
@@ -202,7 +204,7 @@ public class TestLinkTestCase implements TestCase
 		// Steps
 		value = testCaseInfo.get(TestLinkAPIConst.API_RESULT_STEPS);
 		if ( value != null ) {
-			this.testCaseSteps = value.toString();
+			this.testCaseSteps = (List<HashMap<String, Object>>) value;
 		}
 		
 		// Suite verification
@@ -347,7 +349,7 @@ public class TestLinkTestCase implements TestCase
 	 * 
 	 * @return
 	 */
-	public String getTestCaseSteps()
+	public List<HashMap<String, Object>> getTestCaseSteps()
 	{
 		return testCaseSteps;
 	}
@@ -358,7 +360,7 @@ public class TestLinkTestCase implements TestCase
 	 * @param steps
 	 */
 	public void setTestCaseSteps(
-		String steps)
+		List<HashMap<String, Object>> steps)
 	{
 		this.testCaseSteps = steps;
 	}
@@ -606,7 +608,7 @@ public class TestLinkTestCase implements TestCase
 		}
 		
 		if ( otherTC.testCaseSteps != null ) {
-			this.testCaseSteps = new String(otherTC.testCaseSteps);
+			this.testCaseSteps = otherTC.testCaseSteps;
 		}
 		
 		if ( otherTC.testCaseExpectedResults != null ) {

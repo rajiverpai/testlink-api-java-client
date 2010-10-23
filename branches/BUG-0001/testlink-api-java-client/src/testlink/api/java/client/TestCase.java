@@ -21,6 +21,8 @@
 package testlink.api.java.client;
 
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import testlink.api.java.client.tc.autoexec.TestCaseExecutor;
@@ -138,7 +140,7 @@ public interface TestCase
 	 * 
 	 * @return
 	 */
-	public String getTestCaseSteps();
+	public List<HashMap<String, Object>> getTestCaseSteps();
 	
 	/**
 	 * Set the execution steps for the test case.
@@ -146,7 +148,7 @@ public interface TestCase
 	 * @param steps
 	 */
 	public void setTestCaseSteps(
-		String steps);
+		List<HashMap<String, Object>> steps);
 	
 	/**
 	 * Get the test case execution expected results.
