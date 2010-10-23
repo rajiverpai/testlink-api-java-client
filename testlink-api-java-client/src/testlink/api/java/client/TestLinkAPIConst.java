@@ -127,10 +127,7 @@ public interface TestLinkAPIConst
 	public static final String API_PARAM_ENABLE_INVENTORY = "inventoryEnabled";
 	public static final String API_PARAM_ACTIVE = "active";
 	public static final String API_PARAM_PUBLIC = "public";
-
-	
-	
-	
+	public static final String API_PARAM_OPTIONS = "options";
 	
     
 	/*
