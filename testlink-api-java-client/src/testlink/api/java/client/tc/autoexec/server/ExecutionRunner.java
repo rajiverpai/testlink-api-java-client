@@ -66,7 +66,7 @@ public class ExecutionRunner
 		try {
 				
 			// Get args
-			Map argMap = getArgs(args);
+			Map<Object, Object> argMap = getArgs(args);
 			
 			String strPort = (String) argMap.get(P_PORT);
 			String devKey = (String) argMap.get(P_DEV_KEY);
@@ -112,10 +112,10 @@ public class ExecutionRunner
 	}
 	
 		
-	public static Map getArgs(
+	public static Map<Object, Object> getArgs(
 		String[] args)
 	{
-		Map argMap = new HashMap();
+		Map<Object, Object> argMap = new HashMap<Object, Object>();
 		argMap.put(P_REPORT_RESULTS_AFTER_TEST, false);
 		try {
 			for ( int i = 0; i < args.length; i++ ) {

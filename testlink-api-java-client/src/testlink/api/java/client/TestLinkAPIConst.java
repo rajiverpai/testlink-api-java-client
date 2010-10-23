@@ -121,10 +121,10 @@ public interface TestLinkAPIConst
 	public static final String API_PARAM_REQUIREMENTS = "requirements";
 	public static final String API_PARAM_BUG_ID = "bugid";		
 	public static final String API_PARAM_PARENT_ID = "parentid";
-	public static final String API_PARAM_ENABLE_REQUIREMENTS = "enablerequirements";
-	public static final String API_PARAM_ENABLE_TEST_PRIORITY = "enabletestpriority";
-	public static final String API_PARAM_ENABLE_TEST_AUTOMATION = "enableautomation";
-	public static final String API_PARAM_ENABLE_INVENTORY = "enableinventory";
+	public static final String API_PARAM_ENABLE_REQUIREMENTS = "requirementsEnabled";
+	public static final String API_PARAM_ENABLE_TEST_PRIORITY = "testPriorityEnabled";
+	public static final String API_PARAM_ENABLE_TEST_AUTOMATION = "automationEnabled";
+	public static final String API_PARAM_ENABLE_INVENTORY = "inventoryEnabled";
 	public static final String API_PARAM_ACTIVE = "active";
 	public static final String API_PARAM_PUBLIC = "public";
 

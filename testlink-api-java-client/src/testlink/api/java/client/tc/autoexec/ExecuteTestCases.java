@@ -40,7 +40,7 @@ public class ExecuteTestCases extends Thread
 	private boolean reportResultsToTestLink = true;
 	private TestCase[] cases;
 	private String manualExecutorClass;
-	private ArrayList listeners = new ArrayList();
+	private ArrayList<Object> listeners = new ArrayList<Object>();
 	private String buildName = null;
 	private int total = 0;
 	private int remain = 0;

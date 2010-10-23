@@ -36,8 +36,8 @@ public class TestProjectManagement
 extends TestCase
 {
 
-	protected String devKey = "de4d6af9582c63cf624910bb4c861939";
-	protected String url = "http://localhost/testlink_cvs/lib/api/xmlrpc.php";
+	protected String devKey = "831e2e35461fc7dd381e0f5c762cddf5";
+	protected String url = "http://localhost/testlink19/lib/api/xmlrpc.php";
 	
 	private TestLinkAPIClient client;
 	
@@ -58,7 +58,7 @@ extends TestCase
 	{
 		try
 		{
-			createdProjectId = client.createTestProject(projectName, testCasePrefix, description, false, false, false, false, false, false);
+			createdProjectId = client.createTestProject(projectName, testCasePrefix, description, true, true, true, true, false, false);
 			assertTrue( createdProjectId > 0);
 		} catch (TestLinkAPIException e)
 		{

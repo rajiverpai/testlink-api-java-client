@@ -35,7 +35,7 @@ import testlink.api.java.client.TestLinkTestPlan;
 
 public class TestPlanLoader
 {
-	private Map plans;
+	private Map<Integer, TestLinkTestPlan> plans;
 	
 	/**
 	 * Loads all the test plans for a project by name.
@@ -49,7 +49,7 @@ public class TestPlanLoader
 		try {
 			fillPlanList(apiClient, projectName);
 		} catch ( Exception e ) {
-			plans = new HashMap();
+			plans = new HashMap<Integer, TestLinkTestPlan>();
 		}
 	}
 	
@@ -65,14 +65,14 @@ public class TestPlanLoader
 		String planName)
 	{
 		try {
-			plans = new HashMap();
+			plans = new HashMap<Integer, TestLinkTestPlan>();
 			Integer projectID = TestLinkAPIHelper.getProjectID(apiClient, projectName);
 			Integer planID = TestLinkAPIHelper.getPlanID(apiClient, projectID, planName);
 			if ( planID != null ) {
 				loadPlan(apiClient, projectName, planName, planID);
 			}
 		} catch ( Exception e ) {
-			plans = new HashMap();
+			plans = new HashMap<Integer, TestLinkTestPlan>();
 		}
 	}
 	
@@ -115,7 +115,7 @@ public class TestPlanLoader
 	 * 
 	 * @return
 	 */
-	public Map getPlans()
+	public Map<Integer, TestLinkTestPlan> getPlans()
 	{
 		return plans;
 	}
@@ -125,7 +125,7 @@ public class TestPlanLoader
 	 * 
 	 * @return
 	 */
-	public Iterator getPlanIDs() {
+	public Iterator<Integer> getPlanIDs() {
 		return plans.keySet().iterator();
 	}
 	
@@ -144,10 +144,10 @@ public class TestPlanLoader
 	public String toString()
 	{
 		String ret = "";
-		Iterator keys = plans.keySet().iterator();
+		Iterator<Integer> keys = plans.keySet().iterator();
 		while ( keys.hasNext() ) {
-			Object key = keys.next();
-			TestLinkTestPlan plan = (TestLinkTestPlan) plans.get(key);
+			Integer key = keys.next();
+			TestLinkTestPlan plan = plans.get(key);
 			if ( plan != null ) {
 				ret += plan.getTestPlanName() + "\n";
 			}
@@ -162,10 +162,10 @@ public class TestPlanLoader
 		TestLinkAPIClient apiClient,
 		String projectName) throws TestLinkAPIException 
 	{
-		plans = new HashMap();
+		plans = new HashMap<Integer, TestLinkTestPlan>();
 		TestLinkAPIResults results = apiClient.getProjectTestPlans(projectName);
 		for ( int i = 0; i < results.size(); i++ ) {
-			Map data = results.getData(i);
+			Map<Object, Object> data = results.getData(i);
 			Object id = data.get(TestLinkAPIConst.API_RESULT_IDENTIFIER);
 			Object name = data.get(TestLinkAPIConst.API_RESULT_NAME);
 			if ( id != null && name != null ) {
@@ -191,7 +191,7 @@ public class TestPlanLoader
 		String defaultTestCaseUser,
 		String externalDir) throws TestLinkAPIException
 	{
-		Iterator keys = plans.keySet().iterator();
+		Iterator<Integer> keys = plans.keySet().iterator();
 		while ( keys.hasNext() ) {
 			Object key = keys.next();
 			TestLinkTestPlan plan = (TestLinkTestPlan) plans.get(key);

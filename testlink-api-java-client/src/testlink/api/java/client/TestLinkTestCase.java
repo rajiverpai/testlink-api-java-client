@@ -49,7 +49,7 @@ public class TestLinkTestCase implements TestCase
 	private String testCaseExpectedResults;
 	private String testCaseVersion;
 	private String testCaseImportance = TestLinkAPIConst.MEDIUM;
-	private Map custom = new HashMap();
+	private Map<Object, Object> custom = new HashMap<Object, Object>();
 	private TestCaseExecutor autoTestExecutor = null;
 	private boolean isActive = true;
 	
@@ -106,7 +106,7 @@ public class TestLinkTestCase implements TestCase
 	public void initExistingCase(
 		TestLinkTestProject projectInfo,
 		TestLinkTestSuite suiteInfo,
-		Map testCaseInfo) throws TestLinkAPIException
+		Map<Object, Object> testCaseInfo) throws TestLinkAPIException
 	{
 		if ( projectInfo == null ) {
 			throw new TestLinkAPIException(
@@ -621,8 +621,8 @@ public class TestLinkTestCase implements TestCase
 			this.testCaseImportance = new String(otherTC.testCaseImportance);
 		}
 		
-		Map tmp = new HashMap();
-		Iterator keys = otherTC.custom.keySet().iterator();
+		Map<Object, Object> tmp = new HashMap<Object, Object>();
+		Iterator<Object> keys = otherTC.custom.keySet().iterator();
 		while ( keys.hasNext() ) {
 			Object key = keys.next();
 			Object value = otherTC.custom.get(key);
@@ -656,7 +656,7 @@ public class TestLinkTestCase implements TestCase
 		}
 		
 		try {
-			Map tcInfo = TestLinkAPIHelper.getTestCaseInfo(apiClient,
+			Map<Object, Object> tcInfo = TestLinkAPIHelper.getTestCaseInfo(apiClient,
 				testProject.getProjectID(), tc.getTestCaseInternalID());
 			if ( tcInfo != null ) {
 				return true;

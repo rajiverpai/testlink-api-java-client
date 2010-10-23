@@ -34,7 +34,7 @@ public class TestClassField implements TestClassMember {
 		return field.getName();
 	}
 	
-	public boolean isShadowedBy(List members) {
+	public boolean isShadowedBy(List<TestClassMember> members) {
 		return false;
 	}
 	

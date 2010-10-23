@@ -36,8 +36,8 @@ import testlink.api.java.client.TestCase;
  */
 public class TestCaseRegistry
 {
-	Comparator orderByExecOrder = new TestCaseExecOrderCompare();
-	ArrayList caseList = new ArrayList();
+	Comparator<TestCase> orderByExecOrder = new TestCaseExecOrderCompare();
+	ArrayList<TestCase> caseList = new ArrayList<TestCase>();
 	
 	/**
 	 * Removes all TestCases from this registry
@@ -103,7 +103,7 @@ public class TestCaseRegistry
 		String caseNameOrVisibleID)
 	{
 		int idx = find(caseNameOrVisibleID);
-		return (TestCase) caseList.get(idx);
+		return caseList.get(idx);
 	}
         
 	/**
@@ -116,7 +116,7 @@ public class TestCaseRegistry
 		Integer internalID)
 	{
 		int idx = find(internalID);
-		return (TestCase) caseList.get(idx);
+		return caseList.get(idx);
 	}
 	
 	/**
@@ -128,7 +128,7 @@ public class TestCaseRegistry
 	public TestCase get(
 		int index)
 	{
-		return (TestCase) caseList.get(index);
+		return caseList.get(index);
 	}
 	    
 	/**
@@ -187,7 +187,7 @@ public class TestCaseRegistry
 		int count = caseList.size();
 		TestCase cases[] = new TestCase[count];
 		for (int i=0; i < caseList.size(); i++) {
-			TestCase tc = (TestCase) caseList.get(i);
+			TestCase tc = caseList.get(i);
 			cases[i] = tc;
 		}
 		return cases;
@@ -223,7 +223,7 @@ public class TestCaseRegistry
     	
 		// Visible ID takes priority over the name
 		for ( int i = 0; i < caseList.size(); i++ ) {
-			TestCase tcase = (TestCase) caseList.get(i);
+			TestCase tcase = caseList.get(i);
 			if ( isEqual(tcase.getTestCaseVisibleID(), caseNameOrVisibleID) ) {
 				return i;
 			}
@@ -231,7 +231,7 @@ public class TestCaseRegistry
     	
 		// Search by name
 		for ( int i = 0; i < caseList.size(); i++ ) {
-			TestCase tcase = (TestCase) caseList.get(i);
+			TestCase tcase = caseList.get(i);
 			if ( isEqual(tcase.getTestCaseName(), caseNameOrVisibleID) ) {
 				return i;
 			}
@@ -246,7 +246,7 @@ public class TestCaseRegistry
 		Integer internalID)
 	{
 		for ( int i = 0; i < caseList.size(); i++ ) {
-			TestCase tcase = (TestCase) caseList.get(i);
+			TestCase tcase = caseList.get(i);
 			if ( isEqual(tcase.getTestCaseInternalID(), internalID) ) {
 				return i;
 			}

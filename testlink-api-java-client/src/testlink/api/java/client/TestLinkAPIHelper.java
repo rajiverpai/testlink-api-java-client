@@ -45,7 +45,7 @@ public class TestLinkAPIHelper implements TestLinkAPIConst
 		TestLinkAPIClient apiClient,
 		String projectName) throws TestLinkAPIException
 	{
-		Map data = getProjectInfo(apiClient, projectName);
+		Map<?, ?> data = getProjectInfo(apiClient, projectName);
 		return getIdentifier(data);
 	}
 	
@@ -57,7 +57,7 @@ public class TestLinkAPIHelper implements TestLinkAPIConst
 	 * @return
 	 * @throws TestLinkAPIException
 	 */
-	public static Map getProjectInfo(
+	public static Map<Object, Object> getProjectInfo(
 		TestLinkAPIClient apiClient,
 		String projectName) throws TestLinkAPIException
 	{
@@ -81,7 +81,7 @@ public class TestLinkAPIHelper implements TestLinkAPIConst
 	 * @return
 	 * @throws TestLinkAPIException
 	 */
-	public static Map getProjectInfo(
+	public static Map<Object, Object> getProjectInfo(
 		TestLinkAPIClient apiClient,
 		Integer projectID) throws TestLinkAPIException
 	{
@@ -116,7 +116,7 @@ public class TestLinkAPIHelper implements TestLinkAPIConst
 		return getSuiteID(apiClient, projectID, suiteName);
 	}
 	
-	public static Map getSuiteInfo(
+	public static Map<Object, Object> getSuiteInfo(
 		TestLinkAPIClient apiClient, 
 		String projectName, 
 		String suiteName) throws TestLinkAPIException
@@ -129,7 +129,6 @@ public class TestLinkAPIHelper implements TestLinkAPIConst
 	 * Get the suite identifier by test project id and test suite name
 	 * 
 	 * @param apiClient
-	 * @param projectID
 	 * @param suiteName
 	 * @return
 	 * @throws TestLinkAPIException
@@ -139,7 +138,7 @@ public class TestLinkAPIHelper implements TestLinkAPIConst
 		Integer projectID, 
 		String suiteName) throws TestLinkAPIException
 	{
-		Map data = getSuiteInfo(apiClient, projectID, suiteName);
+		Map<?,?> data = getSuiteInfo(apiClient, projectID, suiteName);
 		return getIdentifier(data);
 	}
 	
@@ -151,7 +150,7 @@ public class TestLinkAPIHelper implements TestLinkAPIConst
 	 * @return
 	 * @throws TestLinkAPIException
 	 */
-	public static Map getSuiteInfo(
+	public static Map<Object, Object> getSuiteInfo(
 		TestLinkAPIClient apiClient, 
 		Integer projectID, 
 		String suiteName) throws TestLinkAPIException
@@ -174,10 +173,10 @@ public class TestLinkAPIHelper implements TestLinkAPIConst
 		String projectName,
 		String caseName) throws TestLinkAPIException
 	{
-		Map projectInfo = getProjectInfo(apiClient, projectName);
+		Map<?,?> projectInfo = getProjectInfo(apiClient, projectName);
 		Integer projectID = getIdentifier(projectInfo);
 		Integer caseID = getCaseIDByName(apiClient, projectID, caseName);
-		Map caseInfo = getTestCaseInfo(apiClient, projectID, caseID);
+		Map<?,?> caseInfo = getTestCaseInfo(apiClient, projectID, caseID);
 		Object prefix = projectInfo.get(API_RESULT_PREFIX);
 		Object externalID = caseInfo.get(API_RESULT_TC_EXTERNAL_ID);
 		return prefix.toString() + '-' + externalID.toString();
@@ -221,7 +220,7 @@ public class TestLinkAPIHelper implements TestLinkAPIConst
 		Integer projectID,
 		String caseName) throws TestLinkAPIException
 	{
-		ArrayList cases = new ArrayList();
+		ArrayList<Object> cases = new ArrayList<Object>();
 		TestLinkAPIResults results = apiClient.getFirstLevelTestSuitesForTestProject(
 			projectID);
 		for ( int i = 0; i < results.size(); i++ ) {
@@ -231,7 +230,7 @@ public class TestLinkAPIHelper implements TestLinkAPIConst
 					new Integer(id.toString()), caseName, null, false);
 			}
 		}
-		Map data = getLatestVersionCaseID(cases);
+		Map<?,?> data = getLatestVersionCaseID(cases);
 		return getIdentifier(data);
 	}
 	
@@ -251,9 +250,9 @@ public class TestLinkAPIHelper implements TestLinkAPIConst
 		Integer suiteID,
 		String caseName) throws TestLinkAPIException
 	{
-		ArrayList cases = new ArrayList();
+		ArrayList<Object> cases = new ArrayList<Object>();
 		addAllMatchingCases(apiClient, cases, projectID, suiteID, caseName, null, false);
-		Map data = getLatestVersionCaseID(cases);
+		Map<?,?> data = getLatestVersionCaseID(cases);
 		return getIdentifier(data);
 	}
 	
@@ -262,8 +261,8 @@ public class TestLinkAPIHelper implements TestLinkAPIConst
 		Integer projectID, 
 		String caseName) throws TestLinkAPIException
 	{
-		ArrayList cases = new ArrayList();
-		Map projectInfo = TestLinkAPIHelper.getProjectInfo(apiClient, projectID);
+		ArrayList<Object> cases = new ArrayList<Object>();
+		Map<?,?> projectInfo = TestLinkAPIHelper.getProjectInfo(apiClient, projectID);
 		if ( projectInfo == null ) {
 			throw new TestLinkAPIException("The failed to get the project information.");
 		}
@@ -277,7 +276,7 @@ public class TestLinkAPIHelper implements TestLinkAPIConst
 					new Integer(id.toString()), caseName, prefix, true);
 			}
 		}
-		Map data = getLatestVersionCaseID(cases);
+		Map<?,?> data = getLatestVersionCaseID(cases);
 		return getIdentifier(data);
 	}
 		
@@ -295,7 +294,7 @@ public class TestLinkAPIHelper implements TestLinkAPIConst
 	 */
 	private static void addAllMatchingCases(
 		TestLinkAPIClient apiClient, 
-		ArrayList cases,
+		ArrayList<Object> cases,
 		Integer projectID, 
 		Integer suiteID,
 		String casePattern,
@@ -305,7 +304,7 @@ public class TestLinkAPIHelper implements TestLinkAPIConst
 		TestLinkAPIResults results = apiClient.getCasesForTestSuite(projectID, suiteID);
 		Object id = null;
 		for ( int i = 0; i < results.size(); i++ ) {
-			Map data = results.getData(i);
+			Map<?,?> data = results.getData(i);
 			if ( data != null ) {
 				Object externalID = data.get(API_RESULT_TC_EXTERNAL_ID);
 				Object name = data.get(API_RESULT_NAME);
@@ -336,7 +335,7 @@ public class TestLinkAPIHelper implements TestLinkAPIConst
 	 * @param caseName
 	 * @throws TestLinkAPIException
 	 */
-	public static Map getTestCaseInfo(
+	public static Map<Object, Object> getTestCaseInfo(
 		TestLinkAPIClient apiClient, 
 		Integer projectID, 
 		Integer testCaseID) throws TestLinkAPIException
@@ -353,7 +352,7 @@ public class TestLinkAPIHelper implements TestLinkAPIConst
 					id = cases.getValueByName(c, API_RESULT_IDENTIFIER);
 					Integer currentTestCase = new Integer(id.toString());
 					if ( currentTestCase.compareTo(testCaseID) == 0 ) {
-						return (Map) cases.getData(c);
+						return (Map<Object, Object>) cases.getData(c);
 					}
 				}
 			}
@@ -369,14 +368,14 @@ public class TestLinkAPIHelper implements TestLinkAPIConst
 	 * @param cases
 	 * @return
 	 */
-	private static Map getLatestVersionCaseID(
-		ArrayList cases)
+	private static Map<?,?> getLatestVersionCaseID(
+		ArrayList<Object> cases)
 	{
 		int maxVersion = 0;
 		
 		// find the max version
 		for ( int i = 0; i < cases.size(); i++ ) {
-			Map data = (Map) cases.get(i);
+			Map<?,?> data = (Map<?,?>) cases.get(i);
 			Object version = data.get("tcversion_id");
 			if ( version != null ) {
 				int cv = new Integer(version.toString()).intValue();
@@ -388,7 +387,7 @@ public class TestLinkAPIHelper implements TestLinkAPIConst
 		
 		// return the max version
 		for ( int i = 0; i < cases.size(); i++ ) {
-			Map data = (Map) cases.get(i);
+			Map<?,?> data = (Map<?,?>) cases.get(i);
 			Object version = data.get("tcversion_id");
 			if ( version != null ) {
 				int cv = new Integer(version.toString()).intValue();
@@ -417,7 +416,7 @@ public class TestLinkAPIHelper implements TestLinkAPIConst
 	{
 		Object id = null;
 		Integer planID = null;
-		Map planInfo = getPlanInfo(apiClient, projectID, planName);
+		Map<?,?> planInfo = getPlanInfo(apiClient, projectID, planName);
 		if ( planInfo != null ) {
 			id = planInfo.get(API_RESULT_IDENTIFIER);
 			if ( id != null ) {
@@ -436,7 +435,7 @@ public class TestLinkAPIHelper implements TestLinkAPIConst
 	 * @return
 	 * @throws TestLinkAPIException
 	 */
-	public static Map getPlanInfo(
+	public static Map<Object, Object> getPlanInfo(
 		TestLinkAPIClient apiClient,
 		Integer projectID,
 		String planName) throws TestLinkAPIException
@@ -467,7 +466,7 @@ public class TestLinkAPIHelper implements TestLinkAPIConst
 		Integer planID,
 		String buildName) throws TestLinkAPIException
 	{
-		Map data = getBuildInfo(apiClient, planID, buildName);
+		Map<?,?> data = getBuildInfo(apiClient, planID, buildName);
 		return getIdentifier(data);
 	}
 	
@@ -479,7 +478,7 @@ public class TestLinkAPIHelper implements TestLinkAPIConst
 	 * @return
 	 * @throws TestLinkAPIException
 	 */
-	public static Map getBuildInfo(
+	public static Map<?,?> getBuildInfo(
 		TestLinkAPIClient apiClient,
 		Integer planID,
 		String buildName) throws TestLinkAPIException
@@ -500,7 +499,7 @@ public class TestLinkAPIHelper implements TestLinkAPIConst
 	 * Private methods
 	 */
 	private static Integer getIdentifier(
-		Map data)
+		Map<?,?> data)
 	{
 		Integer identifier = null;
 		Object id = null;

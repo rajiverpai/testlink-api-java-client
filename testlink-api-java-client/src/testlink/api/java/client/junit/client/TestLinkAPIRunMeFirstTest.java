@@ -121,7 +121,7 @@ public class TestLinkAPIRunMeFirstTest implements TestLinkAPIConst,
 				
 				boolean createProject = false;
 				try {
-					Map project = TestLinkAPIHelper.getProjectInfo(api,
+					Map<Object, Object> project = TestLinkAPIHelper.getProjectInfo(api,
 						JUNIT_STATIC_PROJECT);
 					if ( project == null ) {
 						createProject = true;
@@ -165,7 +165,7 @@ public class TestLinkAPIRunMeFirstTest implements TestLinkAPIConst,
 				
 				boolean createSuite = false;
 				try {
-					Map suite = TestLinkAPIHelper.getSuiteInfo(api, JUNIT_STATIC_PROJECT,
+					Map<Object, Object> suite = TestLinkAPIHelper.getSuiteInfo(api, JUNIT_STATIC_PROJECT,
 						JUNIT_STATIC_SUITE);
 					if ( suite == null ) {
 						createSuite = true;

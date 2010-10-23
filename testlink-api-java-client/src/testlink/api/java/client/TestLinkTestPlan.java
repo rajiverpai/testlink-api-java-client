@@ -322,7 +322,7 @@ public class TestLinkTestPlan
 				if ( projectID == null ) {
 					throw new Exception("Could not find the project.");
 				} 
-				Map projectInfo = TestLinkAPIHelper.getProjectInfo(apiClient, projectID);
+				Map<Object, Object> projectInfo = TestLinkAPIHelper.getProjectInfo(apiClient, projectID);
 				testProject = new TestLinkTestProject(projectInfo);
 			} catch ( Exception e ) {
 				isAPIReachable = false;
@@ -345,7 +345,7 @@ public class TestLinkTestPlan
 		
 		if ( isAPIReachable ) {
 			try {
-				Map planInfo = TestLinkAPIHelper.getPlanInfo(apiClient, projectID, planName);
+				Map<Object, Object> planInfo = TestLinkAPIHelper.getPlanInfo(apiClient, projectID, planName);
 				if ( planInfo != null ) {
 					Object value = planInfo.get(TestLinkAPIConst.API_RESULT_ACTIVE);
 					if ( value != null ) {
@@ -384,7 +384,7 @@ public class TestLinkTestPlan
 			try {
 				TestLinkAPIResults caseList = apiClient.getCasesForTestPlan(testPlanID);
 				for ( int i = 0; i < caseList.size(); i++ ) {
-					Map caseInfo = caseList.getData(i);
+					Map<Object, Object> caseInfo = caseList.getData(i);
 					TestCase tc = getTestCaseInstance(caseInfo);
 					testCaseRegistry.put(tc);
 				}
@@ -400,7 +400,7 @@ public class TestLinkTestPlan
 	 * Create an instance of the requested test case class
 	 */
 	private TestCase getTestCaseInstance(
-		Map testCaseInfo) throws Exception
+		Map<Object, Object> testCaseInfo) throws Exception
 	{
 		boolean isCreated = false;
 		String tcSuiteName = (String) testCaseInfo.get(
@@ -408,7 +408,7 @@ public class TestLinkTestPlan
 		TestCase tc = (TestCase) Class.forName(testCaseClass).newInstance();
 		TestLinkAPIResults suites = apiClient.getTestSuitesForTestPlan(testPlanID);
 		for ( int i = 0; i < suites.size(); i++ ) {
-			Map suiteInfo = suites.getData(i);
+			Map<Object, Object> suiteInfo = suites.getData(i);
 			String pSuiteName = (String) suiteInfo.get(TestLinkAPIConst.API_RESULT_NAME);
 			if ( tcSuiteName.equals(pSuiteName) ) {
 				TestLinkTestSuite testSuite = new TestLinkTestSuite(suiteInfo);
@@ -446,7 +446,7 @@ public class TestLinkTestPlan
 		try {
 			TestLinkAPIResults results = apiClient.getCasesForTestPlan(testPlanID);
 			for ( int i = 0; i < results.size(); i++ ) {
-				Map caseInfo = results.getData(i);
+				Map<Object, Object> caseInfo = results.getData(i);
 				Object id = caseInfo.get(TestLinkAPIConst.API_RESULT_IDENTIFIER);
 				if ( id != null ) {
 					Integer caseID = new Integer(id.toString());

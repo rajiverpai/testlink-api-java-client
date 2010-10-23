@@ -32,6 +32,7 @@ import testlink.api.java.client.tc.autoexec.TestPlanPrepare;
  *
  */
 public class AnnotatedTestClassPreparator implements TestPlanPrepare {
+	@SuppressWarnings("unused")
 	private String testClass;
 	
 	public AnnotatedTestClassPreparator(String testClass) {
